@@ -26,4 +26,6 @@ public class PersonController {
     public List<Person> getAllPerson(){
         return personService.getAllPerson();
     }
+
+    
 }
