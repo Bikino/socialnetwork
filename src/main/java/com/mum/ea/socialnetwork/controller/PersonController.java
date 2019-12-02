@@ -32,8 +32,7 @@ public class PersonController {
     public void sendRequest(@RequestParam("requested_by") String requested_by,
                             @RequestParam("requested_to") String requested_to){
 
-        System.out.println("====================================================================");
-        System.out.println(requested_by + "  " + requested_to);
+
         user_relation ur = new user_relation();
         ur.setUser_id_1(Integer.valueOf(requested_by));
         ur.setUser_id_2(Integer.valueOf(requested_to));
@@ -41,5 +40,15 @@ public class PersonController {
         System.out.println(ur);
         user_relation_service.save(ur);
 
+    }
+
+    @RequestMapping(value="/getNoOfFollowersOrPendig/{status}", method = RequestMethod.GET)
+    public long getNoOfFollowersOrPendig(@PathVariable("status") int status){
+        return user_relation_service.noOfFollowers_or_pendingRequest(status);
+    }
+
+    @RequestMapping(value = "/getUserTypesByStatus/{status}", method = RequestMethod.GET)
+    public List<user_relation> getUserTypesByStatus(@PathVariable("status") int status){
+        return user_relation_service.getUserTypesByStatus(status);
     }
 }
