@@ -5,6 +5,7 @@ import com.mum.ea.socialnetwork.domain.user_relation;
 import com.mum.ea.socialnetwork.service.PersonService;
 import com.mum.ea.socialnetwork.service.user_relationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +18,17 @@ public class PersonController {
     private PersonService personService;
     @Autowired
     private user_relationService user_relation_service;
+
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_USER = "ROLE_USER";
+
     @PostMapping(value = "/save")
     public void savePerson(@RequestBody Person person){
         personService.addPerson(person);
 
     }
 
+    @Secured({ROLE_ADMIN})
     @GetMapping(value = "/all")
     public List<Person> getAllPerson(){
         return personService.getAllPerson();

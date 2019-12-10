@@ -8,6 +8,7 @@ public interface PersonService {
     public void addPerson(Person person);
     public Person getPersonById(Long id);
     public List<Person> getAllPerson();
-
+    public Person getPersonByUserName(String userName);
+    public Person getPersonByEmail(String email);
 
 }
