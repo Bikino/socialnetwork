@@ -1,7 +1,7 @@
 package com.mum.ea.socialnetwork.controller;
 
-import com.mum.ea.socialnetwork.domain.Post;
-import com.mum.ea.socialnetwork.service.PostService;
+import com.mum.ea.socialnetwork.domain.Comment;
+import com.mum.ea.socialnetwork.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,21 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class PostController {
+public class CommentController {
 
     @Autowired
-    PostService postService;
+    CommentService commentService;
 
-    @PostMapping("/post/save")
-    public void addPost(@RequestBody Post post ){
-        postService.savePost(post);
+    @GetMapping("comment/all")
+    public List<Comment> getAllComments(@RequestBody Comment comment ){
+
+        return commentService.findAllComments();
 
     }
-
-    @GetMapping("/post/getall")
-    public List<Post> listAllPosts(@RequestBody Post post){
-
-        return postService.getAllPosts();
+    @PostMapping("/comment/add")
+    public void addComment(@RequestBody Comment comment ){
+        commentService.saveComment(comment);
     }
-
 }

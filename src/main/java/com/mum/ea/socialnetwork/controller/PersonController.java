@@ -5,6 +5,7 @@ import com.mum.ea.socialnetwork.domain.user_relation;
 import com.mum.ea.socialnetwork.service.PersonService;
 import com.mum.ea.socialnetwork.util.UtilityConfig;
 import com.mum.ea.socialnetwork.service.user_relationService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,16 +19,15 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/person")
 public class PersonController {
+
+    private String filePath;
+    private String fileType;
+    private MultipartFile multipartFile;
+
     @Autowired
     private PersonService personService;
     @Autowired
     private user_relationService user_relation_service;
-    @PostMapping(value = "/save")
-    public void savePerson(@RequestBody Person person){
-        personService.addPerson(person);
-    private String filePath;
-    private String fileType;
-    private MultipartFile multipartFile;
 
     ///---- saving a person --------------
     @PostMapping("/saveperson")
@@ -116,4 +116,6 @@ public class PersonController {
         //return null;
     }
 
+
 }
+
