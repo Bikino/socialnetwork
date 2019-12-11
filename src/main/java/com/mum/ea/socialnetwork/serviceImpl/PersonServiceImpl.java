@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
 import java.util.Set;
 
 @Service(value = "PersonService")
@@ -24,7 +25,7 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
     private PersonRepository personRepository;
 
     @Override
-    public void addPerson(Person person) {
+    public void savePerson(Person person) {
 
         Person userWithDuplicateUsername = getPersonByUserName(person.getUsername());
         if(userWithDuplicateUsername != null && person.getId() != userWithDuplicateUsername.getId()) {
@@ -42,13 +43,14 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
     }
     @Override
     public Person getPersonById(Long id) {
-        return null;
+        return personRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Person> getAllPerson() {
         return (List<Person>) personRepository.findAll();
     }
+
 
     @Override
     public Person getPersonByUserName(String userName) {
@@ -76,4 +78,5 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
         });
         return authorities;
     }
+
 }
