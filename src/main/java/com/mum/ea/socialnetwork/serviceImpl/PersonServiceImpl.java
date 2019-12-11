@@ -20,9 +20,7 @@ public class PersonServiceImpl implements PersonService {
     public void savePerson(Person person) {
 
         personRepository.save(person);
-
     }
-
     @Override
     public Person getPersonById(Long id) {
         return personRepository.findById(id).orElse(null);
