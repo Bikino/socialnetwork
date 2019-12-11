@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+
 @Service
 @Transactional
 public class PersonServiceImpl implements PersonService {
@@ -15,17 +17,19 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
 
     @Override
-    public void addPerson(Person person) {
+    public void savePerson(Person person) {
 
         personRepository.save(person);
     }
     @Override
     public Person getPersonById(Long id) {
-        return null;
+        return personRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Person> getAllPerson() {
         return (List<Person>) personRepository.findAll();
     }
+
+
 }
