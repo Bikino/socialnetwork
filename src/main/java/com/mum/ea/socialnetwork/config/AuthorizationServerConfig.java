@@ -29,10 +29,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private TokenStore tokenStore;
+
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("as466gf");
+        converter.setSigningKey("123456");
         return converter;
     }
 
@@ -57,6 +60,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
         endpoints
                 .authenticationManager(authenticationManager)
+       // .tokenStore(tokenStore);
                 .accessTokenConverter(accessTokenConverter());
     }
 

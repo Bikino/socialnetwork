@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class Security extends WebSecurityConfigurerAdapter {
 
-   // @Resource(name = "PersonService")
+    @Resource(name = "PersonService")
     private UserDetailsService userDetailsService;
 
     @Override

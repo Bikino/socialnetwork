@@ -2,11 +2,14 @@ package com.mum.ea.socialnetwork.domain;
 
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "ROLES")
 public class Role {
@@ -15,7 +18,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private long id;
-
 
     @Column(name = "NAME")
     private String name;

@@ -4,6 +4,10 @@ import com.mum.ea.socialnetwork.domain.Person;
 import com.mum.ea.socialnetwork.repository.PersonRepository;
 import com.mum.ea.socialnetwork.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +17,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Service
+@Service(value = "PersonService")
 @Transactional
-@Resource(name = "PersonService")
-public class PersonServiceImpl implements PersonService {
+public class PersonServiceImpl implements UserDetailsService, PersonService {
     @Autowired
     private PersonRepository personRepository;
 
@@ -55,5 +58,22 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person getPersonByEmail(String email) {
         return personRepository.findAllByEmail(email);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Person user = getPersonByUserName(username);
+        if(user == null){
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
+    }
+
+    private Set getAuthority(Person user) {
+        Set authorities = new HashSet<>();
+        user.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        });
+        return authorities;
     }
 }
