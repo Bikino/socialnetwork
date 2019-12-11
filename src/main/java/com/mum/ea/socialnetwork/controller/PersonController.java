@@ -7,8 +7,12 @@ import com.mum.ea.socialnetwork.util.UtilityConfig;
 import com.mum.ea.socialnetwork.service.user_relationService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.access.annotation.Secured;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +32,11 @@ public class PersonController {
     private PersonService personService;
     @Autowired
     private user_relationService user_relation_service;
+
+
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_USER = "ROLE_USER";
+
 
     ///---- saving a person --------------
     @PostMapping("/saveperson")
@@ -54,8 +63,10 @@ public class PersonController {
             e.printStackTrace();
         }
 
+
     }
 
+    @Secured({ROLE_ADMIN})
     @GetMapping(value = "/all")
     public List<Person> getAllPerson(){
         return personService.getAllPerson();

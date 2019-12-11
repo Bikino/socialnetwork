@@ -4,19 +4,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Getter
 @Setter
 @Entity
 
-public abstract class  Person {
+public  class  Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
-
     private String email;
     private String phoneNumber;
     private String profilePicture;
@@ -24,6 +26,11 @@ public abstract class  Person {
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "User_ROLES",
+            joinColumns =  @JoinColumn(name ="USER_ID"),inverseJoinColumns= @JoinColumn(name="ROLE_ID"))
+    private Set<Role> roles = new HashSet<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -96,5 +103,8 @@ public abstract class  Person {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+
+
 
 }
