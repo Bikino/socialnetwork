@@ -3,6 +3,7 @@ $(document).ready(function(){
         $("#btn-post").click(function () {
 
             post_ajax_submit();
+            viewList();
             // alert("clicked")
         })
 
@@ -37,6 +38,5 @@ function post_ajax_submit() {
         }
 
     });
-
 
 }

@@ -23,11 +23,11 @@ public class PostController {
         postService.savePost(post);
 
     }
-
     @GetMapping("/post/getall")
-    public List<Post> listAllPosts(@RequestBody Post post){
-
+    public List<Post> listAllPosts(){
+        System.out.println("Display is happening");
         return postService.getAllPosts();
+
     }
 
 }
