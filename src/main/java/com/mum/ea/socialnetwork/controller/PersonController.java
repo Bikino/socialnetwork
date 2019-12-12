@@ -4,15 +4,14 @@ import com.mum.ea.socialnetwork.domain.Person;
 import com.mum.ea.socialnetwork.domain.user_relation;
 import com.mum.ea.socialnetwork.service.PersonService;
 import com.mum.ea.socialnetwork.service.user_relationService;
-import com.mum.ea.socialnetwork.util.UtilityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/person")
 public class PersonController {
     @Autowired
@@ -25,11 +24,17 @@ public class PersonController {
     private MultipartFile multipartFile;
 
 
-    ///---- saving a person --------------
     @PostMapping("/saveperson")
-    public void savePerson(@RequestBody Person person) {
+    public Person savePerson(@RequestBody Person person) {
+        try {
 
-        personService.addPerson(person);
+            personService.addPerson(person);
+            System.out.println("2222");
+            return person;
+        }catch (Exception e){
+            e.printStackTrace();
+          return null;
+        }
     }
 
     //---- saving Picture -------------------
@@ -48,18 +53,17 @@ public class PersonController {
 
 
     ///---- getting one  person --------------
-    @GetMapping(value = "/onePerson")
-    public Person getOnePerson(@RequestParam Long id) {
+    @GetMapping(value = "/onePerson/{id}")
+    public Person getOnePerson(@PathVariable("id")long id) {
         return personService.getPersonById(id);
 
     }
 
     ///------ save edited profile --------------
-    @PostMapping(value = "/editPerson")
-    public void editPersonInfo(@RequestBody Person person) {
+    @PutMapping(value = "/editPerson/{id}")
+    public Person editPersonInfo( @PathVariable("id")long id, @RequestBody Person person) {
 
-        personService.addPerson(person);
-
+        return personService.updatePerson(person );
     }
 
 

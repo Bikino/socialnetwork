@@ -8,6 +8,7 @@ public interface PersonService {
     public void addPerson(Person person);
     public Person getPersonById(Long id);
     public List<Person> getAllPerson();
+    public Person updatePerson(Person person);
 
 
 }

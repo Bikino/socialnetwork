@@ -1,11 +1,11 @@
 package com.mum.ea.socialnetwork.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import javax.persistence.*;
+
+@Entity
 @Data
 public class Person {
     @Id
@@ -15,13 +15,10 @@ public class Person {
     private String lastName;
     private String email;
     private String phoneNumber;
+    private String gender;
+    private String addressState;
+    private String addressCity;
+    private String bio;
     @Lob
     private byte[] profilePicture;
-    private String username;
-    private String password;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Address address;
-
 }

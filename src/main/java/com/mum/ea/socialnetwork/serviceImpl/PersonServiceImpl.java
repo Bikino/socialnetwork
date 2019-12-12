@@ -21,11 +21,16 @@ public class PersonServiceImpl implements PersonService {
     }
     @Override
     public Person getPersonById(Long id) {
-        return null;
+        return personRepository.findById(id).get();
     }
 
     @Override
     public List<Person> getAllPerson() {
         return (List<Person>) personRepository.findAll();
+    }
+
+    @Override
+    public Person updatePerson(Person person) {
+        return personRepository.save(person) ;
     }
 }
