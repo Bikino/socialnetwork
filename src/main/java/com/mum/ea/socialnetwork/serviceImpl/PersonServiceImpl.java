@@ -11,11 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
 import java.util.Set;
 
 @Service(value = "PersonService")
@@ -49,6 +46,11 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
     @Override
     public List<Person> getAllPerson() {
         return (List<Person>) personRepository.findAll();
+    }
+
+    @Override
+    public void deletePersonById(Long personId) {
+        personRepository.deleteById(personId);
     }
 
 

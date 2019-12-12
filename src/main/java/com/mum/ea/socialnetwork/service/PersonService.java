@@ -11,6 +11,8 @@ public interface PersonService {
     public List<Person> getAllPerson();
     public Person getPersonByUserName(String userName);
     public Person getPersonByEmail(String email);
+    public void deletePersonById(Long personId);
+
 
 
 }
