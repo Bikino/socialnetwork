@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
 @Service
 @Transactional
 public class PersonServiceImpl implements PersonService {
@@ -29,6 +28,11 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<Person> getAllPerson() {
         return (List<Person>) personRepository.findAll();
+    }
+
+    @Override
+    public void deletePersonById(Long personId) {
+        personRepository.deleteById(personId);
     }
 
 
