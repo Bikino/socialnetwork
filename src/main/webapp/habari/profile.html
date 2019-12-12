@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,21 +71,21 @@
                     
                   <h4 class="grey">Update your profile</h4>
                   <form class="contact-form">
-                      <div class="form-group">
-                          <i class="ion-images"></i>
-                          <input id="picture" name="picture" class="form-control" placeholder="upload picture">
-                          <button class="btn-primary">Upload picture</button>
-                        </div>
+<!--                      <div class="form-group">-->
+<!--                          <i class="ion-images"></i>-->
+<!--                          <input id="picture" name="picture" class="form-control" placeholder="upload picture">-->
+<!--                          <button class="btn-primary">Upload picture</button>-->
+<!--                        </div>-->
                     <div class="form-group">
                       <i class="icon ion-person"></i>
-                      <input id="contact-name" type="text" name="firstname" class="form-control" placeholder="first name">
+                      <input id="firstName" type="text" class="form-control" placeholder="first name">
                     </div>
                     <div class="form-group">
                         <i class="icon ion-person"></i>
-                        <input id="contact-name" type="text" name="lastname" class="form-control" placeholder="last name" >
+                        <input id="lastName" type="text" class="form-control" placeholder="last name" >
                       </div>
                       <div class="form-group">
-                        <select id="gender" class="form-control" name="gender">
+                        <select id="gender" class="form-control">
                             <option>choose gender</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
@@ -93,26 +93,30 @@
                       </div>
                     <div class="form-group">
                       <i class="icon ion-email"></i>
-                      <input id="contact-email" type="text" name="email" class="form-control" placeholder="email" >
+                      <input id="email" type="text" class="form-control" placeholder="email" >
                     </div>
                     <div class="form-group">
                       <i class="icon ion-android-call"></i>
-                      <input id="contact-phone" type="text" name="phone" class="form-control" placeholder="phone number">
+                      <input id="phoneNumber" type="text"  class="form-control" placeholder="phone number">
                     </div>
                     <div class="form-group">
-                       <input id="contact-phone" type="text" name="phone" class="form-control" placeholder="Street">
+                       <input id="addressState" type="text"  class="form-control" placeholder="State">
                     </div>
                     <div class="form-group">
-                      <input id="contact-phone" type="text" name="phone" class="form-control" placeholder="City">
+                      <input id="addressCity" type="text"  class="form-control" placeholder="City">
                    </div>
-                   <div class="form-group">
-                    <input id="contact-phone" type="text" name="phone" class="form-control" placeholder="State">
-                 </div>
                     <div class="form-group">
-                      <textarea id="form-message" name="message" class="form-control" placeholder="Short Bio" rows="4"></textarea>
-                    </div>
+                      <textarea id="bio" class="form-control" placeholder="Short Bio" rows="4"></textarea>
+                  </div>
+
+
                   </form>
-                  <button class="btn-primary">Update Profile</button>
+                        <button class="btn-primary" id="save_updates">Update Profile</button>
+                        <div id="feedback"></div>
+
+                        <button class="btn-primary" id="view_data">Update Profile</button>
+
+
                 </div>
             		<div class="col-md-4 col-sm-5">
                     <a href="newsfeed.html" class="logo"><img src="images/mylogo.png" alt="Friend Finder"/></a>
@@ -161,6 +165,7 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="servicerest/updateprofile.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
