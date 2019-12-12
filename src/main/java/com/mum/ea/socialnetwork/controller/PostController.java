@@ -4,21 +4,22 @@ import com.mum.ea.socialnetwork.domain.Post;
 import com.mum.ea.socialnetwork.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class PostController {
 
     @Autowired
     PostService postService;
 
-    @PostMapping("/post/save")
+    @PostMapping(value = "/post/save")
     public void addPost(@RequestBody Post post ){
+        System.out.println("hello there");
+        post.setLocalDateTime(LocalDateTime.now());
         postService.savePost(post);
 
     }

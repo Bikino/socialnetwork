@@ -51,6 +51,11 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
         return (List<Person>) personRepository.findAll();
     }
 
+    @Override
+    public void deletePersonById(Long personId) {
+        personRepository.deleteById(personId);
+    }
+
 
     @Override
     public Person getPersonByUserName(String userName) {
