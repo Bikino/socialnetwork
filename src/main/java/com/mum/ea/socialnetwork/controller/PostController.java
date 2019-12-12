@@ -23,7 +23,7 @@ public class PostController {
 
     }
 
-    @GetMapping("/post/all")
+    @GetMapping("/post/getall")
     public List<Post> listAllPosts(@RequestBody Post post){
 
         return postService.getAllPosts();
