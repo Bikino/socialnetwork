@@ -3,158 +3,74 @@ package com.mum.ea.socialnetwork.controller;
 import com.mum.ea.socialnetwork.domain.Person;
 import com.mum.ea.socialnetwork.domain.user_relation;
 import com.mum.ea.socialnetwork.service.PersonService;
+import com.mum.ea.socialnetwork.util.UtilityConfig;
 import com.mum.ea.socialnetwork.service.user_relationService;
-import com.mum.ea.socialnetwork.util.FlyGramConstant;
-import com.mum.ea.socialnetwork.util.UtilityService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+
+import org.springframework.security.access.annotation.Secured;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/person")
 public class PersonController {
-    @Autowired
-    private PersonService personService;
-    @Autowired
-    private user_relationService user_relation_service;
-
-    @Autowired
-    ServletContext servletContext;
 
     private String filePath;
     private String fileType;
     private MultipartFile multipartFile;
 
-
-    private byte[] fileContent;
-
-    private MultipartFile file;
-
-
+    @Autowired
+    private PersonService personService;
+    @Autowired
+    private user_relationService user_relation_service;
 
 
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_USER = "ROLE_USER";
 
 
-///-----try to save image --------------------------
-
-    @PostMapping("/upload")
-    public Person singleFileUpload(@RequestParam("file") MultipartFile file) {
-        //Person account = (Person) servletContext.getAttribute(FlyGramConstant.LOGGED_ACCOUNT_PROFILE);
-        long userId=15;
-        Person account=personService.getPersonById(userId);
-        try {
-            account.setProfilePath(UtilityService.saveFileToFolder(file));
-            Person acc = personService.updatePerson(account);
-            acc.setProfilePic(UtilityService.readBytesFromFile(acc.getProfilePath()));
-            return acc;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-    }
-
-
-
-
-
-    public byte[] getFileContent() {
-        return fileContent;
-    }
-
-    public void setFileContent(byte[] fileContent) {
-        this.fileContent = fileContent;
-    }
-
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
-
-    ///////------end of upload file test ----------
-
-
-
+    ///---- saving a person --------------
     @PostMapping("/saveperson")
-    public Person savePerson(@RequestBody Person person) {
-        try {
-
-            personService.addPerson(person);
-            System.out.println("2222");
-            return person;
-        }catch (Exception e){
-            e.printStackTrace();
-          return null;
+    public String savePerson(@RequestBody Person person) {
+        String message = "";
+        if(fileType.startsWith("image")) {
+            filePath = UtilityConfig.savingPic(multipartFile);
+            person.setProfilePicture(filePath);
+            personService.savePerson(person);
+            message="Saved Successfully";
+        }else{
+            message= "Invalid Picture";
         }
+        return message;
     }
-
-    //---- saving Picture -------------------
+//---- saving Picture -------------------
     @PostMapping("/savepicture")
     public void savePic(@RequestParam("file") MultipartFile file) {
-        try {
-            multipartFile = file;
+        try{
+            multipartFile= file;
             fileType = file.getContentType();
 
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 
-    }
-
-
-
-    ///---- getting one  person --------------
-    @GetMapping("/onePerson/{id}")
-    public Person getOnePerson(@PathVariable("id")long id) {
-        System.out.println("printed ");
-        return personService.getPersonById(id);
 
     }
 
-
-
-
-    ///------ save edited profile --------------
-    @PutMapping(value = "/updateperson/{id}")
-    public Person updatePerson( @PathVariable("id")long id, @RequestBody Person person) {
-        Person personExist= personService.getPersonById(id);
-        personExist.setFirstName(person.getFirstName());
-        personExist.setLastName(person.getLastName());
-        personExist.setAddressCity(person.getAddressCity());
-        personExist.setAddressState(person.getAddressState());
-        personExist.setEmail(person.getEmail());
-        personExist.setBio(person.getBio());
-        personExist.setGender(person.getGender());
-        personExist.setPhoneNumber(person.getPhoneNumber());
-        personExist.setId(id);
-        personExist.setProfilePic(fileContent);
-        Person personToSave =personExist;
-
-        return personService.updatePerson(personToSave);
-    }
-
-
+    @Secured({ROLE_ADMIN})
     @GetMapping(value = "/all")
     public List<Person> getAllPerson(){
-        try {
-           return personService.getAllPerson();
-        }catch (Exception e){
-
-            e.printStackTrace();
-            return null;
-        }
-
+        return personService.getAllPerson();
     }
-
-
 
     @RequestMapping(value="/sendRequest", method = RequestMethod.POST)
     public void sendRequest(@RequestParam("requested_by") String requested_by,
@@ -179,4 +95,38 @@ public class PersonController {
     public List<user_relation> getUserTypesByStatus(@PathVariable("status") int status){
         return user_relation_service.getUserTypesByStatus(status);
     }
+
+
+    ///---- getting one  person --------------
+    @GetMapping(value = "/onePerson")
+    public Person getOnePerson(@RequestParam Long id) {
+        return personService.getPersonById(id);
+
+    }
+///------ save edited profile --------------
+    @PostMapping(value ="/editPerson")
+    public void editPersonInfo(@RequestBody Person person) {
+       // String message = "";
+
+//        try {
+//
+//            Optional<Person> person1 = Optional.ofNullable(personService.getPersonById(id));
+//            if (!person1.isPresent()) {
+//                message = "The person is not present";
+//                return message;
+//            }
+            personService.savePerson(person);
+//            message = "Person updated";
+//            return message;
+//
+//        } catch (Exception e) {
+//            e.getMessage();
+//
+//        }
+
+        //return null;
+    }
+
+
 }
+

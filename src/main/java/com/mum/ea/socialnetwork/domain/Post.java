@@ -1,9 +1,11 @@
 package com.mum.ea.socialnetwork.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -11,11 +13,20 @@ public class Post {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long postId;
-    private String postTitle;
     private String postText;
 //    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm")
     //This will be timestamp format.
-    private String localDateTime;
+    @CreationTimestamp
+    private LocalDateTime localDateTime;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedDateTime;
+
+    @ManyToOne
+    private Person person;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 
 // This will be file(image) type
     private String postPhoto;
@@ -28,14 +39,6 @@ public class Post {
         this.postId = postId;
     }
 
-    public String getPostTitle() {
-        return postTitle;
-    }
-
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
-
     public String getPostText() {
         return postText;
     }
@@ -44,12 +47,20 @@ public class Post {
         this.postText = postText;
     }
 
-    public String getLocalDateTime() {
+    public LocalDateTime getLocalDateTime() {
         return localDateTime;
     }
 
-    public void setLocalDateTime(String localDateTime) {
+    public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
     }
 
     public String getPostPhoto() {
@@ -60,11 +71,11 @@ public class Post {
         this.postPhoto = postPhoto;
     }
 
+
     @Override
     public String toString() {
         return "Post{" +
                 "postId=" + postId +
-                ", postTitle='" + postTitle + '\'' +
                 ", postText='" + postText + '\'' +
                 ", localDateTime='" + localDateTime + '\'' +
                 ", postPhoto='" + postPhoto + '\'' +
