@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,22 +70,49 @@
             		<div class="col-md-8 col-sm-7">
                     
                   <h4 class="grey">Update your profile</h4>
-                  <form class="contact-form">
-                      <div class="form-group">
-                          <i class="ion-images"></i>
-                          <input id="picture" name="picture" class="form-control" placeholder="upload picture">
-                          <button class="btn-primary">Upload picture</button>
+
+<!--                        <div class="col-md-3">-->
+<!--                            <div class="text-center">-->
+<!--                                <a href="#" data-toggle="modal" data-target="#changepic"> <img id="p_image2" src="" width="160px" height="160px" class="avatar img-circle" alt="avatar">-->
+<!--                                    <h4>change photo...</h4>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                        <!-------------------------------update picture ------------>
+                        <img id="p_image2" src="" width="160px" height="160px" class="avatar img-circle" alt="avatar">
+                        <div class="modal-follow-body">
+                            <div id="feed1"></div>
+
+                            <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+                                <input type="hidden" class="form-control" id="user_id" value="15"/>
+
+                                <input type="file" class="form-control" ID="profilepic_edit" name="file" /><br/>
+                                <input type="submit" ID="btn" value="Upload Pic" class="btn btn-primary" />
+
+                            </form>
+
+
+
                         </div>
+
+                        <!---------------------------end of update picture ------------>
+
+                  <form class="contact-form">
+                      <input id="id" type="hidden" class="form-control"  value="">
+
+
                     <div class="form-group">
                       <i class="icon ion-person"></i>
-                      <input id="contact-name" type="text" name="firstname" class="form-control" placeholder="first name">
+                      <input id="firstName" type="text" class="form-control" placeholder="first name" value="">
+
                     </div>
                     <div class="form-group">
                         <i class="icon ion-person"></i>
-                        <input id="contact-name" type="text" name="lastname" class="form-control" placeholder="last name" >
+                        <input id="lastName" type="text" class="form-control" placeholder="last name" value="">
                       </div>
                       <div class="form-group">
-                        <select id="gender" class="form-control" name="gender">
+                        <select id="gender" class="form-control">
                             <option>choose gender</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
@@ -93,27 +120,35 @@
                       </div>
                     <div class="form-group">
                       <i class="icon ion-email"></i>
-                      <input id="contact-email" type="text" name="email" class="form-control" placeholder="email" >
+                      <input id="email" type="text" class="form-control" placeholder="email" value="" >
                     </div>
                     <div class="form-group">
                       <i class="icon ion-android-call"></i>
-                      <input id="contact-phone" type="text" name="phone" class="form-control" placeholder="phone number">
+                      <input id="phoneNumber" type="text"  class="form-control" placeholder="phone number" value="">
                     </div>
                     <div class="form-group">
-                       <input id="contact-phone" type="text" name="phone" class="form-control" placeholder="Street">
+                       <input id="addressState" type="text"  class="form-control" placeholder="State" value="">
                     </div>
                     <div class="form-group">
-                      <input id="contact-phone" type="text" name="phone" class="form-control" placeholder="City">
+                      <input id="addressCity" type="text"  class="form-control" placeholder="City" value="">
                    </div>
-                   <div class="form-group">
-                    <input id="contact-phone" type="text" name="phone" class="form-control" placeholder="State">
-                 </div>
                     <div class="form-group">
-                      <textarea id="form-message" name="message" class="form-control" placeholder="Short Bio" rows="4"></textarea>
-                    </div>
+                      <textarea id="bio" class="form-control" placeholder="Short Bio" rows="4" value=""></textarea>
+                  </div>
+
+
                   </form>
-                  <button class="btn-primary">Update Profile</button>
-                </div>
+                        <button class="btn-primary" id="save_person">save person</button>
+                        <div id="feedback"></div>
+
+                        <div id="profile"></div>
+
+                        <button class="btn-primary" id="view_data">view Profile</button>
+                        <button class="btn-primary" id="save_updates">update Profile</button>
+
+
+
+                    </div>
             		<div class="col-md-4 col-sm-5">
                     <a href="newsfeed.html" class="logo"><img src="images/mylogo.png" alt="Friend Finder"/></a>
                   <h4 class="grey">Reach Us</h4>
@@ -128,6 +163,39 @@
     		</div>
     	</div>
     </div>
+
+
+
+<!--    &lt;!&ndash;	Changing profile picture modal	&ndash;&gt;-->
+<!--    <div class="modal fade" id="changepic" tabindex="1" role="dialog" aria-labelledby="Loading..." aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-lg"></div>-->
+<!--        <div class="modal-follow-content">-->
+<!--            <button class="close" type="button" data-dismiss="modal" aria-label="close">-->
+<!--                <span arial-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--            <div class="modal-header">-->
+<!--                <h4 class="modal-title" id="exampleModalLabel">-->
+<!--                    <center>Changing profile picture</center>-->
+<!--                </h4>-->
+<!--            </div>-->
+<!--            <div class="modal-follow-body">-->
+<!--                <div id="feed1"></div>-->
+
+<!--                <form method="POST" enctype="multipart/form-data" id="fileUploadForm">-->
+
+<!--                    <input type="file" class="form-control" ID="profilepic_edit" name="file" /><br/>-->
+<!--                    <input type="submit" ID="btn" value="Upload Pic" class="btn btn-primary" />-->
+
+<!--                </form>-->
+
+
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
 
     <!-- Footer
     ================================================= -->
@@ -161,6 +229,11 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.appear.min.js"></script>
+    <script src="js/jquery.incremental-counter.js"></script>
+    <script src="servicerest/updateprofile.js"></script>
+    <script src="servicerest/viewprofile.js"></script>
+    <script src="servicerest/uploadpic.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
