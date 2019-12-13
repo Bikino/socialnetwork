@@ -4,10 +4,14 @@ import com.mum.ea.socialnetwork.domain.Person;
 import com.mum.ea.socialnetwork.domain.user_relation;
 import com.mum.ea.socialnetwork.service.PersonService;
 import com.mum.ea.socialnetwork.service.user_relationService;
+import com.mum.ea.socialnetwork.util.FlyGramConstant;
+import com.mum.ea.socialnetwork.util.UtilityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 @RestController
@@ -19,9 +23,64 @@ public class PersonController {
     @Autowired
     private user_relationService user_relation_service;
 
+    @Autowired
+    ServletContext servletContext;
+
     private String filePath;
     private String fileType;
     private MultipartFile multipartFile;
+
+
+    private byte[] fileContent;
+
+    private MultipartFile file;
+
+
+
+
+
+
+///-----try to save image --------------------------
+
+    @PostMapping("/upload")
+    public Person singleFileUpload(@RequestParam("file") MultipartFile file) {
+        //Person account = (Person) servletContext.getAttribute(FlyGramConstant.LOGGED_ACCOUNT_PROFILE);
+        long userId=15;
+        Person account=personService.getPersonById(userId);
+        try {
+            account.setProfilePath(UtilityService.saveFileToFolder(file));
+            Person acc = personService.updatePerson(account);
+            acc.setProfilePic(UtilityService.readBytesFromFile(acc.getProfilePath()));
+            return acc;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+
+
+
+    public byte[] getFileContent() {
+        return fileContent;
+    }
+
+    public void setFileContent(byte[] fileContent) {
+        this.fileContent = fileContent;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    ///////------end of upload file test ----------
+
 
 
     @PostMapping("/saveperson")
@@ -53,26 +112,46 @@ public class PersonController {
 
 
     ///---- getting one  person --------------
-    @GetMapping(value = "/onePerson/{id}")
+    @GetMapping("/onePerson/{id}")
     public Person getOnePerson(@PathVariable("id")long id) {
+        System.out.println("printed ");
         return personService.getPersonById(id);
 
     }
 
+
+
+
     ///------ save edited profile --------------
-    @PutMapping(value = "/editPerson/{id}")
-    public Person editPersonInfo( @PathVariable("id")long id, @RequestBody Person person) {
+    @PutMapping(value = "/updateperson/{id}")
+    public Person updatePerson( @PathVariable("id")long id, @RequestBody Person person) {
+        Person personExist= personService.getPersonById(id);
+        personExist.setFirstName(person.getFirstName());
+        personExist.setLastName(person.getLastName());
+        personExist.setAddressCity(person.getAddressCity());
+        personExist.setAddressState(person.getAddressState());
+        personExist.setEmail(person.getEmail());
+        personExist.setBio(person.getBio());
+        personExist.setGender(person.getGender());
+        personExist.setPhoneNumber(person.getPhoneNumber());
+        personExist.setId(id);
+        personExist.setProfilePic(fileContent);
+        Person personToSave =personExist;
 
-        return personService.updatePerson(person );
+        return personService.updatePerson(personToSave);
     }
-
-
-
 
 
     @GetMapping(value = "/all")
     public List<Person> getAllPerson(){
-        return personService.getAllPerson();
+        try {
+           return personService.getAllPerson();
+        }catch (Exception e){
+
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
 
