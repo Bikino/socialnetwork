@@ -20,5 +20,6 @@ public class Person {
     private String addressCity;
     private String bio;
     @Lob
-    private byte[] profilePicture;
+    private byte[] profilePic;
+    private String profilePath;
 }
