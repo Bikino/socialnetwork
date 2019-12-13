@@ -1,6 +1,7 @@
 package com.mum.ea.socialnetwork.serviceImpl;
 
 import com.mum.ea.socialnetwork.domain.Person;
+import com.mum.ea.socialnetwork.domain.Post;
 import com.mum.ea.socialnetwork.repository.PersonRepository;
 import com.mum.ea.socialnetwork.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,6 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
     public void deletePersonById(Long personId) {
         personRepository.deleteById(personId);
     }
-
 
     @Override
     public Person getPersonByUserName(String userName) {

@@ -9,5 +9,6 @@ public interface PostService {
     public void savePost(Post post);
     public List<Post> getAllPosts();
     public void deletePostById(Long postId);
+    public List<Post> getPostByPersonId(Long personId);
 
 }

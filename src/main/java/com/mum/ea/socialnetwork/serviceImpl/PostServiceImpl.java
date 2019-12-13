@@ -1,5 +1,6 @@
 package com.mum.ea.socialnetwork.serviceImpl;
 
+import com.mum.ea.socialnetwork.domain.Person;
 import com.mum.ea.socialnetwork.domain.Post;
 import com.mum.ea.socialnetwork.repository.PostRepository;
 import com.mum.ea.socialnetwork.service.PostService;
@@ -32,5 +33,11 @@ public class PostServiceImpl implements PostService {
     public void deletePostById(Long postId) {
          postRepository.deleteById(postId);
     }
+
+    @Override
+    public List<Post> getPostByPersonId(Long personId) {
+        return postRepository.findAllPostinThisP(personId);
+    }
+
 
 }
