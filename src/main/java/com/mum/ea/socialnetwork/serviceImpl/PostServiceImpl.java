@@ -4,7 +4,6 @@ import com.mum.ea.socialnetwork.domain.Post;
 import com.mum.ea.socialnetwork.repository.PostRepository;
 import com.mum.ea.socialnetwork.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +25,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> getAllPosts() {
-        Sort sort = Sort.by("postId").descending();
         return (List<Post>) postRepository.findAll();
     }
 

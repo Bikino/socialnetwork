@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,21 +18,14 @@ public class PostController {
     @PostMapping(value = "/post/save")
     public void addPost(@RequestBody Post post ){
         System.out.println("hello there");
-        post.setLocalDateTime(LocalDateTime.now());
         postService.savePost(post);
 
     }
+
     @GetMapping("/post/getall")
-    public List<Post> listAllPosts(){
-        System.out.println("Display is happening");
+    public List<Post> listAllPosts(@RequestBody Post post){
+
         return postService.getAllPosts();
-
-    }
-
-    @GetMapping("/getpost/{post_id}")
-    public Post getPost(@PathVariable("post_id") Long id){
-        System.out.println("I am fine");
-        return postService.getPostById(id);
     }
 
 }

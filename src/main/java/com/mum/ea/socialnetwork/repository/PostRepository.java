@@ -13,5 +13,4 @@ public interface PostRepository extends CrudRepository<Post,Long> {
 //    public Post searchUnhealthyPost(@PathParam("unhealthy") String unhealthy);
 
 
-
 }
