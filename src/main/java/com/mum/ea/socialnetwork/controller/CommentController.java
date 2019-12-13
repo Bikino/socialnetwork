@@ -1,6 +1,7 @@
 package com.mum.ea.socialnetwork.controller;
 
 import com.mum.ea.socialnetwork.domain.Comment;
+import com.mum.ea.socialnetwork.domain.Post;
 import com.mum.ea.socialnetwork.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,4 +28,6 @@ public class CommentController {
     public void addComment(@RequestBody Comment comment ){
         commentService.saveComment(comment);
     }
+
+
 }

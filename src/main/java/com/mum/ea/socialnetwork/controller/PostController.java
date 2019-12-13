@@ -19,13 +19,17 @@ public class PostController {
     public void addPost(@RequestBody Post post ){
         System.out.println("hello there");
         postService.savePost(post);
-
     }
 
     @GetMapping("/post/getall")
     public List<Post> listAllPosts(@RequestBody Post post){
-
         return postService.getAllPosts();
+    }
+
+    @GetMapping("/timeline/{id}")
+    public List<Post> postsPerPerson(@PathVariable("id") Long personId){
+        System.out.println("hello thereeee");
+        return postService.getPostByPersonId(personId);
     }
 
 }
