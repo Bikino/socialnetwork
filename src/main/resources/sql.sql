@@ -12,8 +12,8 @@ INSERT INTO post (post_id,post_text ,person_id) VALUES (4,'Hello there how re u 
 INSERT INTO post (post_id,post_text ,person_id) VALUES (5,'Hello there how re u doing?',4);
 INSERT INTO post (post_id,post_text ,person_id) VALUES (6,'Hello there how re u doing?',2);
 
-INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (1,'Comment 1',1);
-INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (2,'Comment 2',2);
-INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (3,'Comment 3',3);
-INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (4,'Comment 4',3);
+INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (1,'Comment 1',36);
+INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (2,'Comment 2',37);
+INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (3,'Comment 3',37);
+INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (4,'Comment 4',37);
 INSERT INTO comment (comment_id,comment_text,post_post_id) VALUE (5,'Comment 5',4);
