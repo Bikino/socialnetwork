@@ -37,8 +37,9 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
         Set<String> role = new HashSet<String>();
         role.add("USER");
         //person.setRoles(role);
-        personRepository.save(person);
+       personRepository.save(person);
     }
+
     @Override
     public Person getPersonById(Long id) {
         return personRepository.findById(id).orElse(null);
@@ -52,6 +53,16 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
     @Override
     public void deletePersonById(Long personId) {
         personRepository.deleteById(personId);
+    }
+
+    @Override
+    public Person updatePerson(Person personToSave) {
+        return personRepository.save(personToSave);
+    }
+
+    @Override
+    public Person addPerson(Person person) {
+        return personRepository.save(person);
     }
 
     @Override

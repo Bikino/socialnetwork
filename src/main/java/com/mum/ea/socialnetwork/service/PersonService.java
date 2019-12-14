@@ -13,8 +13,7 @@ public interface PersonService {
     public Person getPersonByUserName(String userName);
     public Person getPersonByEmail(String email);
     public void deletePersonById(Long personId);
-
-
-
+    Person updatePerson(Person personToSave);
+    Person addPerson(Person person);
 
 }
