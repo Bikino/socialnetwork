@@ -4,7 +4,6 @@ import com.mum.ea.socialnetwork.domain.Person;
 import com.mum.ea.socialnetwork.domain.user_relation;
 import com.mum.ea.socialnetwork.service.PersonService;
 import com.mum.ea.socialnetwork.service.user_relationService;
-import com.mum.ea.socialnetwork.util.FlyGramConstant;
 import com.mum.ea.socialnetwork.util.UtilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,9 +11,9 @@ import org.springframework.security.access.annotation.Secured;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
+
+import javax.servlet.ServletContext;
 import java.util.List;
 
 @RestController
