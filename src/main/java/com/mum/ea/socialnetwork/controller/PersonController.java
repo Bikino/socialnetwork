@@ -120,7 +120,7 @@ public class PersonController {
     public Person getOnePerson(@PathVariable("id")long id) {
         Person p = new Person();
         try {
-            System.out.println("printed ");
+           /// System.out.println("printed ");
             p = personService.getPersonById(id);
             p.setProfilePic(UtilityService.readBytesFromFile(p.getProfilePath()));
         }catch(Exception e){
@@ -151,7 +151,7 @@ public class PersonController {
         return personService.updatePerson(personToSave);
     }
 
-    @Secured({ROLE_ADMIN})
+   /// @Secured({ROLE_ADMIN})
     @GetMapping(value = "/all")
     public List<Person> getAllPerson(){
         try {

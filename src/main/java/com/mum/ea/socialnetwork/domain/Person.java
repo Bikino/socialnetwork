@@ -29,6 +29,7 @@ public class Person {
     private String profilePath;
     private String username;
     private String password;
+    private String status;
 
 
 
