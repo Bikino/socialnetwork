@@ -71,6 +71,9 @@ function viewprofileOnePerson() {
 
                 $("#profile").html(profile);
                 //$("#postcount").html(count + " posts ");
+                $('#p_image2').attr('src', 'data:image/png;base64,'+data.profilePath);
+                alert(data.profilePath);
+
             },
             error : function() {
                 console.log("not found");
@@ -107,6 +110,7 @@ function updateProfile() {
 
             let json = "<div> <strong>"+data.firstName+" "+data.lastName+" your data updated successfully</strong>" + "</div>";
             $('#feedback').html(json);
+
 
         },
         error:function (e) {

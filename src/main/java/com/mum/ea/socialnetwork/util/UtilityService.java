@@ -72,11 +72,9 @@ public class UtilityService {
 
 	public static byte[] readBytesFromFile(File file) throws Exception {
 		byte[] fileContent = Files.readAllBytes(file.toPath());
-		if (fileContent.length > 429495295)
-			throw new Exception("Your File Exceded Allowed Size (4GB)");
-		else {
+
 			return fileContent;
-		}
+
 	}
 
 	public static String getPostType(String path) {

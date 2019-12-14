@@ -88,7 +88,7 @@ public class PersonController {
         try {
 
             personService.addPerson(person);
-            System.out.println("2222");
+          //  System.out.println("2222");
             return person;
         }catch (Exception e){
             e.printStackTrace();
@@ -114,9 +114,15 @@ public class PersonController {
     ///---- getting one  person --------------
     @GetMapping("/onePerson/{id}")
     public Person getOnePerson(@PathVariable("id")long id) {
-        System.out.println("printed ");
-        return personService.getPersonById(id);
-
+        Person p = new Person();
+        try {
+            System.out.println("printed ");
+            p = personService.getPersonById(id);
+            p.setProfilePic(UtilityService.readBytesFromFile(p.getProfilePath()));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return p;
     }
 
 

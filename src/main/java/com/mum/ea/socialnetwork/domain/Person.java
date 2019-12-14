@@ -22,4 +22,6 @@ public class Person {
     @Lob
     private byte[] profilePic;
     private String profilePath;
+    private String username;
+    private String password;
 }
