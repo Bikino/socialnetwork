@@ -5,6 +5,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
+
 @Entity
 @Data
 public class Person {
@@ -24,4 +29,15 @@ public class Person {
     private String profilePath;
     private String username;
     private String password;
+
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "User_ROLES",
+            joinColumns =  @JoinColumn(name ="USER_ID"),inverseJoinColumns= @JoinColumn(name="ROLE_ID"))
+    private Set<Role> roles = new HashSet<>();
+
+
+
+
 }

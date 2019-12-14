@@ -7,11 +7,14 @@ import com.mum.ea.socialnetwork.service.user_relationService;
 import com.mum.ea.socialnetwork.util.FlyGramConstant;
 import com.mum.ea.socialnetwork.util.UtilityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+
+import org.springframework.security.access.annotation.Secured;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletContext;
 import java.util.List;
 
 @RestController
@@ -35,6 +38,8 @@ public class PersonController {
 
     private MultipartFile file;
 
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_USER = "ROLE_USER";
 
 
 
@@ -147,7 +152,7 @@ public class PersonController {
         return personService.updatePerson(personToSave);
     }
 
-
+    @Secured({ROLE_ADMIN})
     @GetMapping(value = "/all")
     public List<Person> getAllPerson(){
         try {
