@@ -19,18 +19,22 @@ public class AdminPanelController {
     @Autowired
     CommentService commentService;
 // === Person ADMIN Starts here==============================
-    @GetMapping("/admin/person/all")
-    public List<Person> getAllPerson(@RequestBody Person person){
-        return personService.getAllPerson();
-    }
 
-    @GetMapping("/admin/person/{id}")
-    public Person getPerson(@PathVariable("id") Long id){
-       return personService.getPersonById(id);
-    }
     @GetMapping("/admin/person/delete/{id}")
     public String deletePerson(@PathVariable("id") Long id){
          personService.deletePersonById(id);
          return "deleted";
     }
+
+    @GetMapping("/admin/person/disable/{id}")
+    public Person disableAccount( @PathVariable("id") long id){
+
+        Person personToDesable= personService.getPersonById(id);
+        personToDesable.setStatus("disabled");
+
+        return personToDesable;
+    }
+
+
+
 }
