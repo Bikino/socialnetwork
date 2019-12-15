@@ -36,11 +36,22 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .anonymous().disable()
+
+        http.csrf().disable();
+
+        http.
+                anonymous().disable()
                 .authorizeRequests()
-                .antMatchers("/api-docs/**").permitAll();
+                .antMatchers("/login").permitAll()
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/manager/**").hasAuthority("MANAGER")
+                .antMatchers("/user/**").hasAuthority("USER")
+                .anyRequest().authenticated()
+                .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .and()
+                .exceptionHandling().accessDeniedPage("http://localhost:8090/login");
     }
 
     @Bean
