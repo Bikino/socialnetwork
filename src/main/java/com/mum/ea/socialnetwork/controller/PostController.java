@@ -5,6 +5,7 @@ import com.mum.ea.socialnetwork.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,5 +32,22 @@ public class PostController {
         System.out.println("hello thereeee");
         return postService.getPostByPersonId(personId);
     }
+
+//    @PostMapping("/upload")
+//    public Post singleFileUpload(@RequestParam("file") MultipartFile file) {
+//
+//        long postId=15;
+//        Post post=postService.getPostById(postId);
+//        try {
+//            post.setProfilePath(UtilityService.saveFileToFolder(file));
+//            Post acc = postService.savePost(post);
+//            acc.setProfilePic(UtilityService.readBytesFromFile(acc.getProfilePath()));
+//            return acc;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//
+//    }
 
 }
