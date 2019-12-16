@@ -52,7 +52,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient(CLIEN_ID)
                 .secret(CLIENT_SECRET)
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )
-                .scopes(SCOPE_READ, SCOPE_WRITE, TRUST);
+                .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+                .authorities("CLIENT").redirectUris("http://localhost:8090/");
     }
 
     @Override

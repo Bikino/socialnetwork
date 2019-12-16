@@ -28,6 +28,7 @@ public class Security extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
@@ -47,12 +48,15 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manager/**").hasAuthority("MANAGER")
                 .antMatchers("/user/**").hasAuthority("USER")
                 .anyRequest().authenticated()
+
                 .and()
                 .logout()
-                .invalidateHttpSession(true)
-                .and()
-                .exceptionHandling().accessDeniedPage("http://localhost:8090/login");
+                .invalidateHttpSession(true);
+
     }
+
+
+
 
     @Bean
     public BCryptPasswordEncoder encoder(){
