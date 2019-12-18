@@ -28,6 +28,7 @@ public class Security extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
@@ -36,12 +37,26 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .anonymous().disable()
+
+        http.csrf().disable();
+
+        http.
+                anonymous().disable()
                 .authorizeRequests()
-                .antMatchers("/api-docs/**").permitAll();
+                .antMatchers("/login").permitAll()
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/manager/**").hasAuthority("MANAGER")
+                .antMatchers("/user/**").hasAuthority("USER")
+                .anyRequest().authenticated()
+
+                .and()
+                .logout()
+                .invalidateHttpSession(true);
+
     }
+
+
+
 
     @Bean
     public BCryptPasswordEncoder encoder(){

@@ -4,8 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
+@Data
 public class Comment {
 
     @Id
@@ -15,5 +16,6 @@ public class Comment {
 
     @ManyToOne
     private Post post;
+
 
 }

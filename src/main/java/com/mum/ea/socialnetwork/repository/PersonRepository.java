@@ -11,8 +11,8 @@ import javax.websocket.server.PathParam;
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
     @Query(value = "SELECT p FROM Person p WHERE username = :username")
-    public Person findAllByUserName(@PathParam("username") String username);
+    Person findAllByUserName(@PathParam("username") String username);
 
     @Query(value = "SELECT p FROM Person p WHERE email = :email")
-    public Person findAllByEmail(@PathParam("email") String email);
+    Person findAllByEmail(@PathParam("email") String email);
 }

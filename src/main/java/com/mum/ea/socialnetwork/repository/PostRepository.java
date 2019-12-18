@@ -13,8 +13,10 @@ import java.util.List;
 @Repository
 public interface PostRepository extends CrudRepository<Post,Long> {
         @Query(value = "select * from Post where person_id =:id", nativeQuery = true)
+
         public List<Post> findAllPostinThisP(@PathParam("id") long  id);
 
         @Query(value = "select * from Post order by post_id asc", nativeQuery = true)
         public  List<Post> findAllInAscOrder();
+
 }

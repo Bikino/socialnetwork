@@ -37,8 +37,10 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
         Set<String> role = new HashSet<String>();
         role.add("USER");
         //person.setRoles(role);
-        personRepository.save(person);
+       personRepository.save(person);
+      
     }
+
     @Override
     public Person getPersonById(Long id) {
         return personRepository.findById(id).orElse(null);
@@ -55,6 +57,16 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
     }
 
     @Override
+    public Person updatePerson(Person personToSave) {
+        return personRepository.save(personToSave);
+    }
+
+    @Override
+    public Person addPerson(Person person) {
+        return personRepository.save(person);
+    }
+
+    @Override
     public Person getPersonByUserName(String userName) {
       return  personRepository.findAllByUserName(userName);
     }
@@ -68,7 +80,7 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Person user = getPersonByUserName(username);
         if(user == null){
-            throw new UsernameNotFoundException("Invalid username or password.");
+            return null;
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
     }
