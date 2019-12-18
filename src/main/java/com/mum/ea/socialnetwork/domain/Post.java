@@ -15,8 +15,7 @@ public class Post {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long postId;
     private String postText;
-//    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm")
-    //This will be timestamp format.
+
     @CreationTimestamp
     private LocalDateTime localDateTime;
 
@@ -29,10 +28,14 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
+
     private String profilePath;
 
     @Lob
     private byte[] profilePic;
+
+
+    private String status;
 
 
 }

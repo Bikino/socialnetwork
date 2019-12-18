@@ -83,4 +83,21 @@ public class PostController {
         return postService.getPostByPersonId(personId);
     }
 
+//    @PostMapping("/upload")
+//    public Post singleFileUpload(@RequestParam("file") MultipartFile file) {
+//
+//        long postId=15;
+//        Post post=postService.getPostById(postId);
+//        try {
+//            post.setProfilePath(UtilityService.saveFileToFolder(file));
+//            Post acc = postService.savePost(post);
+//            acc.setProfilePic(UtilityService.readBytesFromFile(acc.getProfilePath()));
+//            return acc;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//
+//    }
+
 }
