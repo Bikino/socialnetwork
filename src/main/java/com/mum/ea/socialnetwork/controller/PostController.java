@@ -93,5 +93,13 @@ public class PostController {
         return postService.getPostByPersonId(personId);
     }
 
+    @GetMapping("/unhealthy")
+    public List<Post> findAllUnhealthypost(){
+        String s = "sex";
+        return postService.getUnhealthyPost(s);
+    }
+
+
+
 
 }
