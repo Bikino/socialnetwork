@@ -83,6 +83,13 @@ public class PostController {
         return postService.getPostByPersonId(personId);
     }
 
+    @GetMapping("/unhealthy")
+    public List<Post> findAllUnhealthypost(){
+        String s = "sex";
+        return postService.getUnhealthyPost(s);
+    }
+
+
 //    @PostMapping("/upload")
 //    public Post singleFileUpload(@RequestParam("file") MultipartFile file) {
 //

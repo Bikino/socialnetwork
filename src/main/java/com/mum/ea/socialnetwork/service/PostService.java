@@ -11,4 +11,6 @@ public interface PostService {
     public void deletePostById(Long postId);
     public List<Post> getPostByPersonId(Long personId);
 
+    public List<Post> getUnhealthyPost(String sex);
+
 }
