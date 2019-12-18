@@ -123,8 +123,8 @@ public class PersonController {
         try {
            /// System.out.println("printed ");
             p = personService.getPersonById(mid);
-           // p.setProfilePic(UtilityService.readBytesFromFile(p.getProfilePath()));
-            System.out.println("I've reached....");
+           p.setProfilePic(UtilityService.readBytesFromFile(p.getProfilePath()));
+            //System.out.println("I've reached....");
         }catch(Exception e){
             e.printStackTrace();
         }
