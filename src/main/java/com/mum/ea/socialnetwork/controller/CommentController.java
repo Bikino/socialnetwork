@@ -36,6 +36,4 @@ public class CommentController {
     public void addComment(@RequestBody Comment comment ){
         commentService.saveComment(comment);
     }
-
-
 }
