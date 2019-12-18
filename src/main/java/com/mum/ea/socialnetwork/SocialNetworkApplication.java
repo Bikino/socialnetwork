@@ -20,7 +20,7 @@ public class SocialNetworkApplication {
 //	public MultipartResolver multipartResolver() {
 //		CommonsMultipartResolver multipartResolver
 //				= new CommonsMultipartResolver();
-//		multipartResolver.setMaxUploadSize(5242880);
+//		multipartResolver.setMaxUploadSize(52428800);
 //		return multipartResolver;
 //	}
 }
