@@ -5,8 +5,8 @@ import com.mum.ea.socialnetwork.domain.Comment;
 import java.util.List;
 
 public interface CommentService {
-    public void saveComment(Comment comment);
-    public List<Comment> findAllComments();
+    void saveComment(Comment comment);
+    List<Comment> findAllComments();
 
 
 

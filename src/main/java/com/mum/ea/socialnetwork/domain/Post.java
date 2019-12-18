@@ -1,5 +1,6 @@
 package com.mum.ea.socialnetwork.domain;
 
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 
 @Entity
+@Data
 public class Post {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -28,57 +30,10 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
-// This will be file(image) type
-    private String postPhoto;
+    private String profilePath;
 
-    public Long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
-
-    public String getPostText() {
-        return postText;
-    }
-
-    public void setPostText(String postText) {
-        this.postText = postText;
-    }
-
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
-    }
-
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
-    }
-
-    public LocalDateTime getUpdatedDateTime() {
-        return updatedDateTime;
-    }
-
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
-        this.updatedDateTime = updatedDateTime;
-    }
-
-    public String getPostPhoto() {
-        return postPhoto;
-    }
-
-    public void setPostPhoto(String postPhoto) {
-        this.postPhoto = postPhoto;
-    }
+    @Lob
+    private byte[] profilePic;
 
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "postId=" + postId +
-                ", postText='" + postText + '\'' +
-                ", localDateTime='" + localDateTime + '\'' +
-                ", postPhoto='" + postPhoto + '\'' +
-                '}';
-    }
 }

@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PersonService {
-    public void savePerson(Person person);
-    public Person getPersonById(Long id);
-    public List<Person> getAllPerson();
-    public Person getPersonByUserName(String userName);
-    public Person getPersonByEmail(String email);
-    public void deletePersonById(Long personId);
+    void savePerson(Person person);
+    Person getPersonById(Long id);
+    List<Person> getAllPerson();
+    Person getPersonByUserName(String userName);
+    Person getPersonByEmail(String email);
+    void deletePersonById(Long personId);
     Person updatePerson(Person personToSave);
     Person addPerson(Person person);
 

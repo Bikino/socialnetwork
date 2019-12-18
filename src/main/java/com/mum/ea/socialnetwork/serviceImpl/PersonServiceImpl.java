@@ -38,6 +38,7 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
         role.add("USER");
         //person.setRoles(role);
        personRepository.save(person);
+      
     }
 
     @Override

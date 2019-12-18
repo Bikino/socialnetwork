@@ -1,8 +1,11 @@
 package com.mum.ea.socialnetwork.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 public class Comment {
 
     @Id
@@ -13,19 +16,5 @@ public class Comment {
     @ManyToOne
     private Post post;
 
-    public Long getCommentId() {
-        return commentId;
-    }
 
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
-    }
-
-    public String getCommentText() {
-        return commentText;
-    }
-
-    public void setCommentText(String commentText) {
-        this.commentText = commentText;
-    }
 }

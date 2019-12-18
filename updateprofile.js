@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 function updateProfile() {
     let path="http://localhost:8080/saveperson";
-     let search={}
+     let search={};
      search["firstName"]=$("#firstName").val();
      search["lastName"]=$("#lastName").val();
      search["email"]=$("#email").val();

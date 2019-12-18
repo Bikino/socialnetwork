@@ -5,24 +5,32 @@ import com.mum.ea.socialnetwork.domain.Post;
 import com.mum.ea.socialnetwork.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class CommentController {
 
     @Autowired
     CommentService commentService;
 
     @GetMapping("comment/all")
-    public List<Comment> getAllComments(@RequestBody Comment comment ){
-
+    public List<Comment> getAllComments(Comment comment ){
         return commentService.findAllComments();
 
+    }
+    @GetMapping("comments/all/{id}")
+    public List<Comment> getAllCommentsForPost(@PathVariable("id") Long id){
+        List<Comment> commentList = new ArrayList<>();
+        for(Comment c : commentService.findAllComments()){
+            if(c.getPost().getPostId()==id){
+                commentList.add(c);
+            }
+        }
+        return commentList;
     }
     @PostMapping("/comment/add")
     public void addComment(@RequestBody Comment comment ){
