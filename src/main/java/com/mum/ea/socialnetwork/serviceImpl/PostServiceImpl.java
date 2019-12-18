@@ -39,5 +39,10 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllPostinThisP(personId);
     }
 
+    @Override
+    public List<Post> getAllPostsSorted() {
+        return postRepository.findAllInOrder();
+    }
+
 
 }

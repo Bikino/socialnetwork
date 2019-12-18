@@ -49,7 +49,7 @@ public class PersonController {
     @PostMapping("/upload")
     public Person singleFileUpload(@RequestParam("file") MultipartFile file) {
         //Person account = (Person) servletContext.getAttribute(FlyGramConstant.LOGGED_ACCOUNT_PROFILE);
-        long userId=48;
+        long userId=1;
         Person account=personService.getPersonById(userId);
         try {
             account.setProfilePath(UtilityService.saveFileToFolder(file));
@@ -119,7 +119,7 @@ public class PersonController {
     @GetMapping("/onePerson/{id}")
     public Person getOnePerson(@PathVariable("id")long id) {
         Person p = new Person();
-        long mid = 48;
+        long mid = 1;
         try {
            /// System.out.println("printed ");
             p = personService.getPersonById(mid);
@@ -138,6 +138,7 @@ public class PersonController {
     @PutMapping(value = "/updateperson/{id}")
     public Person updatePerson( @PathVariable("id")long id, @RequestBody Person person) {
         Person personExist= personService.getPersonById(id);
+
         personExist.setFirstName(person.getFirstName());
         personExist.setLastName(person.getLastName());
         personExist.setAddressCity(person.getAddressCity());
