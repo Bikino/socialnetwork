@@ -74,6 +74,16 @@ public class PostController {
 
     @GetMapping("/post/getall")
     public List<Post> listAllPosts(){
+
+        List<Post> myPosts= postService.getAllPosts();
+      myPosts.forEach(post-> {
+          try {
+              post.setProfilePic(UtilityService.readBytesFromFile(post.getProfilePath()));
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+      });
+
         return postService.getAllPosts();
     }
 
@@ -90,21 +100,6 @@ public class PostController {
     }
 
 
-//    @PostMapping("/upload")
-//    public Post singleFileUpload(@RequestParam("file") MultipartFile file) {
-//
-//        long postId=15;
-//        Post post=postService.getPostById(postId);
-//        try {
-//            post.setProfilePath(UtilityService.saveFileToFolder(file));
-//            Post acc = postService.savePost(post);
-//            acc.setProfilePic(UtilityService.readBytesFromFile(acc.getProfilePath()));
-//            return acc;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//
-//    }
+
 
 }
