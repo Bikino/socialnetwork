@@ -79,7 +79,7 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Person user = getPersonByUserName(username);
         if(user == null){
-            throw new UsernameNotFoundException("Invalid username or password.");
+            return null;
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
     }
