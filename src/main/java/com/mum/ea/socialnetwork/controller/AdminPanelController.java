@@ -36,5 +36,14 @@ public class AdminPanelController {
     }
 
 
+    @GetMapping("/admin/person/enable/{id}")
+    public Person enableAccount( @PathVariable("id") long id){
+
+        Person personToEnable= personService.getPersonById(id);
+        personToEnable.setStatus("disabled");
+
+        return personToEnable;
+    }
+
 
 }

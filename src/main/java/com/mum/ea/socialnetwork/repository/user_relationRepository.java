@@ -12,9 +12,9 @@ import java.util.List;
 public interface user_relationRepository extends CrudRepository<user_relation, Long> {
 
     @Query(value = "SELECT count(*) FROM user_relation  WHERE status = :status", nativeQuery = true)
-    public long noOfFollowers_or_pendingRequest(@PathParam("status") int status);
+    long noOfFollowers_or_pendingRequest(@PathParam("status") int status);
 
     @Query("SELECT ur FROM user_relation ur WHERE status = :status")
-    public List<user_relation> getUserTypesByStatus(@PathParam("status") int status);
+    List<user_relation> getUserTypesByStatus(@PathParam("status") int status);
 
 }

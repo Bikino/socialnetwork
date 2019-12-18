@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 function post_ajax_submit() {
 
-    var post = {}
+    var post = {};
     post["post_text"] = $("#post_text").val();
 
     $("#btn-post").prop("disabled", true);

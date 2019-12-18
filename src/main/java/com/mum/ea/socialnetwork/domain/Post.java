@@ -7,8 +7,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-@Data
+
 @Entity
+@Data
 public class Post {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -27,11 +28,14 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
-    @Lob
-    private byte[] postPicture;
 
-    private String postPhoto;
+    private String profilePath;
+
+    @Lob
+    private byte[] profilePic;
+
 
     private String status;
+
 
 }

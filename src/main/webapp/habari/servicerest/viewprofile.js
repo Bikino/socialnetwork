@@ -8,12 +8,12 @@ $(document).ready(function () {
     });
 
     $("#save_updates").click(function () {
-        alert(" update clicked")
+        alert(" update clicked");
         updateProfile();
 
     })
 
-})
+});
 
 function viewprofiles() {
     var count = 0;
@@ -86,7 +86,7 @@ function viewprofileOnePerson() {
 function updateProfile() {
     var id=15;
    // let path="http://localhost:8080/person/updateperson"+id;
-    let search={}
+    let search={};
     search["id"]=$("#id").val();
     search["firstName"]=$("#firstName").val();
     search["lastName"]=$("#lastName").val();
