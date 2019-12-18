@@ -12,4 +12,6 @@ public interface PostService {
     public List<Post> getPostByPersonId(Long personId);
     List<Post> getAllPostsSorted();
 
+    public List<Post> getUnhealthyPost(String sex);
+
 }
