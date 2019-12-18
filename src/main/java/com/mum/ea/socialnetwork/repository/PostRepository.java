@@ -17,8 +17,8 @@ public interface PostRepository extends CrudRepository<Post,Long> {
 
         public List<Post> findAllPostinThisP(@PathParam("id") long  id);
 
-        @Query(value = "select * from Post order by post_id asc", nativeQuery = true)
-        public  List<Post> findAllInAscOrder();
+        @Query(value = "select * from Post order by updated_date_time desc", nativeQuery = true)
+        public  List<Post> findAllInOrder();
 
         @Query(value = "select * from Post where post_text like '%sex'",nativeQuery = true)
         public List<Post> searchUnhealthyPost(@Param("sex") String sex);

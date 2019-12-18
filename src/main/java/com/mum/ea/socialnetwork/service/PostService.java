@@ -10,6 +10,7 @@ public interface PostService {
     public List<Post> getAllPosts();
     public void deletePostById(Long postId);
     public List<Post> getPostByPersonId(Long personId);
+    List<Post> getAllPostsSorted();
 
     public List<Post> getUnhealthyPost(String sex);
 
