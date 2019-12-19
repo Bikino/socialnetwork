@@ -5,8 +5,8 @@ import com.mum.ea.socialnetwork.domain.Advert;
 import java.util.List;
 
 public interface AdvertService {
-    public void saveAdvert(Advert advertisment);
-    public List<Advert> getAllAdvertisment();
+    void saveAdvert(Advert advertisment);
+    List<Advert> getAllAdvertisment();
 
-    public Advert findAdvertByCity(String city);
+    Advert findAdvertByCity(String city);
 }

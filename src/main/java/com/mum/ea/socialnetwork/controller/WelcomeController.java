@@ -69,11 +69,7 @@ public class WelcomeController {
     @RequestMapping(value = "isAthenticated")
     public String isAthenticated(HttpServletRequest request) {
         String user=request.getUserPrincipal().getName();
-        if (user != null) {
-            return user;
-        }
-
-        return null;
+        return user;
     }
 
 }

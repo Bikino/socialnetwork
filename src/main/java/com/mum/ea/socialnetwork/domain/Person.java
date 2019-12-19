@@ -4,6 +4,7 @@ import lombok.Data;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import java.util.HashSet;
@@ -15,12 +16,17 @@ import java.util.Set;
 @Data
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
     private String email;
+
     private String phoneNumber;
+
     private String gender;
     private String addressState;
     private String addressCity;
@@ -28,7 +34,9 @@ public class Person {
     @Lob
     private byte[] profilePic;
     private String profilePath;
+
     private String username;
+
     private String password;
     private String status;
 

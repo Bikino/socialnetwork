@@ -8,6 +8,6 @@ public interface FollowerService {
 
     List<Long> findAllByFolloweeIdEquals(Long id);
     List<Long> findAllByFollowerIdEquals(Long id);
-    public Follower follow(Long followerId, Long followeeId);
+    Follower follow(Long followerId, Long followeeId);
 
 }

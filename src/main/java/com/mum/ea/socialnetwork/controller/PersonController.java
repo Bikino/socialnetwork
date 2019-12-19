@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.servlet.ServletContext;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -92,10 +94,14 @@ public class PersonController {
     public Person savePerson(@RequestBody Person person) {
         UserRoles userRoles= new UserRoles();
 
+
         try {
             person.setPassword(new BCryptPasswordEncoder().encode(person.getPassword()));
-
+//            List<Person> allPerson = personService.getAllPerson();
+//            long mmid = allPerson.get(allPerson.size()-1).getId()+1;
+//            person.setId(mmid);
             personService.addPerson(person);
+
            userRoles.setRoleId(1);
            userRoles.setUserId(person.getId());
            userRolesService.saveUserRoles(userRoles);

@@ -69,11 +69,14 @@ public class PostController {
 
     @PostMapping(value = "/post/save")
     public void addPost(@RequestBody Post post ){
-
+    try {
         post.setProfilePath(filePath);
         post.setStatus("Enabled");
         post.setPostType(mfile.getContentType());
         postService.savePost(post);
+    }catch (Exception e){
+
+    }
     }
 
     @GetMapping("/post/getall")
