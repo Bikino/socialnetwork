@@ -14,4 +14,6 @@ public interface PostService {
 
     public List<Post> getUnhealthyPost(String sex);
 
+    public void desablePostById(Long id);
+
 }
