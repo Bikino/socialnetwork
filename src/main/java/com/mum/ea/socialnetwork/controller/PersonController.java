@@ -52,18 +52,14 @@ public class PersonController {
 ///-----try to save image --------------------------
 
     @PostMapping("/upload")
-    public Person singleFileUpload(@RequestParam("file") MultipartFile file) {
-        //Person account = (Person) servletContext.getAttribute(FlyGramConstant.LOGGED_ACCOUNT_PROFILE);
-        long userId=1;
-        Person account=personService.getPersonById(userId);
+    public void singleFileUpload(@RequestParam("file") MultipartFile file) {
+
         try {
-            account.setProfilePath(UtilityService.saveFileToFolder(file));
-            Person acc = personService.updatePerson(account);
-            acc.setProfilePic(UtilityService.readBytesFromFile(acc.getProfilePath()));
-            return acc;
+            filePath=UtilityService.saveFileToFolder(file);
+
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+
         }
 
     }
@@ -98,11 +94,12 @@ public class PersonController {
 
         try {
             person.setPassword(new BCryptPasswordEncoder().encode(person.getPassword()));
+
             personService.addPerson(person);
            userRoles.setRoleId(1);
            userRoles.setUserId(person.getId());
-
            userRolesService.saveUserRoles(userRoles);
+
             return person;
         }catch (Exception e){
             e.printStackTrace();
@@ -129,12 +126,11 @@ public class PersonController {
     @GetMapping("/onePerson/{id}")
     public Person getOnePerson(@PathVariable("id")long id) {
         Person p = new Person();
-        long mid = 1;
+
         try {
-           /// System.out.println("printed ");
-            p = personService.getPersonById(mid);
+            p = personService.getPersonById(id);
            p.setProfilePic(UtilityService.readBytesFromFile(p.getProfilePath()));
-            //System.out.println("I've reached....");
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -147,10 +143,10 @@ public class PersonController {
         Person p = new Person();
 
         try {
-            /// System.out.println("printed ");
+
             p = personService.getPersonByUserName(username);
             p.setProfilePic(UtilityService.readBytesFromFile(p.getProfilePath()));
-            //System.out.println("I've reached....");
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -173,10 +169,18 @@ public class PersonController {
         personExist.setGender(person.getGender());
         personExist.setPhoneNumber(person.getPhoneNumber());
         personExist.setId(id);
-        personExist.setProfilePic(fileContent);
-        Person personToSave =personExist;
+        personExist.setProfilePath(filePath);
+        personService.savePerson(personExist);
 
-        return personService.updatePerson(personToSave);
+        try {
+            personExist.setProfilePic(UtilityService.readBytesFromFile(person.getProfilePath()));
+
+            return personExist;
+        }catch (Exception e) {
+           return null;
+
+        }
+
     }
 
    /// @Secured({ROLE_ADMIN})

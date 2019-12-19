@@ -35,7 +35,7 @@ public class PostController {
             e.printStackTrace();
 
         }
-        System.out.print("I am there....");
+
 
     }
 
@@ -67,7 +67,7 @@ public class PostController {
 
     @PostMapping(value = "/post/save")
     public void addPost(@RequestBody Post post ){
-        System.out.println("hello there");
+
         post.setProfilePath(filePath);
         postService.savePost(post);
     }
