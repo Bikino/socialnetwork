@@ -34,7 +34,7 @@ public class Person {
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "User_ROLES",
+    @JoinTable(name = "User_ROLESS",
             joinColumns =  @JoinColumn(name ="USER_ID"),inverseJoinColumns= @JoinColumn(name="ROLE_ID"))
     private Set<Role> roles = new HashSet<>();
 
