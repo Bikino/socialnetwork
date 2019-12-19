@@ -75,7 +75,7 @@ public class PostController {
     @GetMapping("/post/getall")
     public List<Post> listAllPosts(){
 
-        List<Post> myPosts= postService.getAllPosts();
+        List<Post> myPosts= postService.getAllPostsSorted();
       myPosts.forEach(post-> {
           try {
               post.setProfilePic(UtilityService.readBytesFromFile(post.getProfilePath()));
@@ -84,7 +84,7 @@ public class PostController {
           }
       });
 
-        return postService.getAllPosts();
+        return myPosts;
     }
 
     @GetMapping("/timeline/{id}")
