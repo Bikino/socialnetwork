@@ -5,14 +5,14 @@
 # alter table user_roles add constraint FKh8ciramu9cc9q3qcqiv4ue8a6 foreign key (role_id) references roles (id);
 # alter table user_roles add constraint FKhfh9dx7w3ubf1co1vdev94g3f foreign key (user_id) references users (id);
 #
-# INSERT INTO roles(description,name) values ('Admin', 'ADMIN');
-# INSERT INTO roles(description,name) values ('User', 'USER');
+#  INSERT INTO roles(description,name) values ('Admin', 'ADMIN');
+#  INSERT INTO roles(description,name) values ('User', 'USER');
 # INSERT INTO roles(description,name) values ('Manager', 'MANAGER');
 #
 # INSERT INTO person (id,email,first_name, last_name,password,username) values (11,'admin@gmail.com','Chris', 'admin','$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u','chris');
 # INSERT INTO person (id,email,first_name, last_name,password,username) values (21,'admin@gmail.com','Abebe', 'admin','$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u','abebe');
 # INSERT INTO person (email,first_name, last_name,password,username) values ('admin@gmail.com','Robert', 'admin','$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u','robert');
-# INSERT INTO person (email,first_name, last_name,password,username) values ('admin@gmail.com','Mola', 'admin','$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u','mola');
+# INSERT INTO person (emaisel,first_name, last_name,password,username) values ('admin@gmail.com','Mola', 'admin','$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u','mola');
 # INSERT INTO person (email,first_name, last_name,password,username) values ('admin@gmail.com','Emmanuel', 'admin','$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u','emmanuel');
 # INSERT INTO person (email,first_name, last_name,password,username) values ('admin@gmail.com','Dawit', 'admin','$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u','dawit');
 # INSERT INTO person (email,first_name, last_name,password,username) values ('admin@gmail.com','Bikino', 'admin','$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u','bikino');
