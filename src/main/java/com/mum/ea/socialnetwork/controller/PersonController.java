@@ -1,14 +1,17 @@
 package com.mum.ea.socialnetwork.controller;
 
 import com.mum.ea.socialnetwork.domain.Person;
+import com.mum.ea.socialnetwork.domain.UserRoles;
 import com.mum.ea.socialnetwork.domain.user_relation;
 import com.mum.ea.socialnetwork.service.PersonService;
+import com.mum.ea.socialnetwork.service.UserRolesService;
 import com.mum.ea.socialnetwork.service.user_relationService;
 import com.mum.ea.socialnetwork.util.UtilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.access.annotation.Secured;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +28,8 @@ public class PersonController {
     @Autowired
     private user_relationService user_relation_service;
 
+    @Autowired
+    private UserRolesService userRolesService;
     @Autowired
     ServletContext servletContext;
 
@@ -89,10 +94,15 @@ public class PersonController {
 
     @PostMapping("/saveperson")
     public Person savePerson(@RequestBody Person person) {
-        try {
+        UserRoles userRoles= new UserRoles();
 
+        try {
+            person.setPassword(new BCryptPasswordEncoder().encode(person.getPassword()));
             personService.addPerson(person);
-          //  System.out.println("2222");
+           userRoles.setRoleId(1);
+           userRoles.setUserId(person.getId());
+
+           userRolesService.saveUserRoles(userRoles);
             return person;
         }catch (Exception e){
             e.printStackTrace();
