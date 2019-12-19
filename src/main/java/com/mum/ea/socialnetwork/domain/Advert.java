@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class Advertisment {
+public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String description;
+    private String title;
     @Lob
     private byte[] Banner;
     private String BannerPath;
