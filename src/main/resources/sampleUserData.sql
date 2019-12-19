@@ -27,6 +27,3 @@
 # insert into user_roles(USER_ID,ROLE_ID) values (17,2);
 # insert into USER_ROLES(USER_ID,ROLE_ID) values (18,2);
 # insert into USER_ROLES(USER_ID,ROLE_ID) values (19,2);
-
-
-

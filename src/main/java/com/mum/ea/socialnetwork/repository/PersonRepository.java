@@ -20,4 +20,5 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
     List<Person> findAllByIdNotIn(List<Long>users);
 
     List<Person> findAllByIdIn(List<Long>users);
+    Person findPersonByUsername(String username);
 }
