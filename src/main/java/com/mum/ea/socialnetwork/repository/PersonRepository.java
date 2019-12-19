@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.websocket.server.PathParam;
+import java.util.List;
 
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
@@ -15,4 +16,8 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
     @Query(value = "SELECT p FROM Person p WHERE email = :email")
     Person findAllByEmail(@PathParam("email") String email);
+
+    List<Person> findAllByIdNotIn(List<Long>users);
+
+    List<Person> findAllByIdIn(List<Long>users);
 }
