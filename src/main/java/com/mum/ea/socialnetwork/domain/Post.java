@@ -37,5 +37,7 @@ public class Post {
 
     private String status;
 
+    private String postType;
+
 
 }
