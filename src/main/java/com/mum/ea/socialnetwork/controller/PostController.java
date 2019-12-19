@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class PostController {
 
     private byte[] fileContent;
 
-    private MultipartFile file;
+    private MultipartFile mfile;
 
     private String filePath;
 
@@ -31,6 +32,7 @@ public class PostController {
 
         try {
             filePath=UtilityService.saveFileToFolder(file);
+            this.mfile = file;
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -52,11 +54,11 @@ public class PostController {
     }
 
     public MultipartFile getFile() {
-        return file;
+        return mfile;
     }
 
     public void setFile(MultipartFile file) {
-        this.file = file;
+        this.mfile = file;
     }
 
     ///////------end of upload file test ----------
@@ -70,6 +72,7 @@ public class PostController {
 
         post.setProfilePath(filePath);
         post.setStatus("Enabled");
+        post.setPostType(mfile.getContentType());
         postService.savePost(post);
     }
 
@@ -77,15 +80,20 @@ public class PostController {
     public List<Post> listAllPosts(){
 
         List<Post> myPosts= postService.getAllPostsSorted();
-      myPosts.forEach(post-> {
+        List<Post> lastUp = new ArrayList<>();
+     // myPosts.forEach(post-> {
+        Post post = new Post();
           try {
-              post.setProfilePic(UtilityService.readBytesFromFile(post.getProfilePath()));
+              for(Post pp : myPosts) {
+                  pp.setProfilePic(UtilityService.readBytesFromFile(pp.getProfilePath()));
+                  lastUp.add(pp);
+              }
           } catch (Exception e) {
               e.printStackTrace();
           }
-      });
+    //  });
 
-        return myPosts;
+        return lastUp;
     }
 
     @GetMapping("/timeline/{id}")
