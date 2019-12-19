@@ -167,6 +167,11 @@ public class PersonController {
 
     }
 
+    @GetMapping(value = "/allperson")
+    public List<Person> findAllPersons(){
+        return personService.getAllPerson();
+    }
+
 
 
     @RequestMapping(value="/sendRequest", method = RequestMethod.POST)

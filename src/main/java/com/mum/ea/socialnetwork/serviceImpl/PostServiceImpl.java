@@ -40,8 +40,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+
     public List<Post> getAllPostsSorted() {
         return postRepository.findAllInOrder();
+
+    }
+    @Override
+    public List<Post> getUnhealthyPost(String sex) {
+        return postRepository.searchUnhealthyPost(sex);
+
     }
 
 
