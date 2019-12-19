@@ -95,4 +95,13 @@ public class PersonServiceImpl implements UserDetailsService, PersonService {
         return authorities;
     }
 
+    @Override
+    public List<Person> findAllByIdNotIn(List<Long> users) {
+        return personRepository.findAllByIdNotIn(users);
+    }
+
+    @Override
+    public List<Person> findAllByIdIn(List<Long> users) {
+        return personRepository.findAllByIdIn(users);
+    }
 }
