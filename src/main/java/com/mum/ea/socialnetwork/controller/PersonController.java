@@ -141,6 +141,21 @@ public class PersonController {
         return p;
     }
 
+    ///---- getting one  person --------------
+    @GetMapping("/onePersonByUsername/{username}")
+    public Person onePersonByUsername(@PathVariable("username")String username) {
+        Person p = new Person();
+
+        try {
+            /// System.out.println("printed ");
+            p = personService.getPersonByUserName(username);
+            p.setProfilePic(UtilityService.readBytesFromFile(p.getProfilePath()));
+            //System.out.println("I've reached....");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return p;
+    }
 
 
 

@@ -1,3 +1,4 @@
+
 # create table roles (id bigint not null auto_increment, created_on bigint, description varchar(255), modified_on bigint, name varchar(255), primary key (id));
 # create table user_roles (user_id bigint not null, role_id bigint not null, primary key (user_id, role_id)) ;
 #

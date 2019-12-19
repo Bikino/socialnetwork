@@ -16,4 +16,8 @@ public interface PersonService {
     Person updatePerson(Person personToSave);
     Person addPerson(Person person);
 
+    List<Person> findAllByIdNotIn(List<Long>users);
+    List<Person> findAllByIdIn(List<Long>users);
+
+
 }
