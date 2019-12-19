@@ -55,5 +55,10 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    public void desablePostById(Long id) {
+
+    }
+
 
 }

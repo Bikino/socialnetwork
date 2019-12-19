@@ -123,6 +123,14 @@ public class PersonController {
 
 
     ///---- getting one  person --------------
+
+    @GetMapping("/onePersonTest/{id}")
+    public Person getOnePersonTest(@PathVariable("id") long id){
+
+        return personService.getPersonById(id);
+    }
+
+
     @GetMapping("/onePerson/{id}")
     public Person getOnePerson(@PathVariable("id")long id) {
         Person p = new Person();

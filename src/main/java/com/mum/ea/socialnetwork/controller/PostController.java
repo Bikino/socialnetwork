@@ -69,6 +69,7 @@ public class PostController {
     public void addPost(@RequestBody Post post ){
 
         post.setProfilePath(filePath);
+        post.setStatus("Enabled");
         postService.savePost(post);
     }
 
@@ -97,6 +98,20 @@ public class PostController {
     public List<Post> findAllUnhealthypost(){
         String s = "sex";
         return postService.getUnhealthyPost(s);
+    }
+
+    @PostMapping("/disablepost/{id}")
+    public Post desablePost(@PathVariable("id") Long id){
+        try {
+            Post p = postService.getPostById(id);
+            p.setStatus("Disabled");
+            postService.savePost(p);
+            System.out.println("I am here...");
+            return p;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
